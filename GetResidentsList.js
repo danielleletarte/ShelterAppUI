@@ -3,6 +3,9 @@ import gql from "graphql-tag";
 import React from "react";
 import { Text, View } from 'react-native';
 
+import  { List, ListItem }  from  'react-native-elements';
+
+
 const GetResidentsList = (props) => (
     <Query
         query={gql`
@@ -18,11 +21,19 @@ const GetResidentsList = (props) => (
             if (loading) return <Text>Loading...</Text>;
             if (error) return <Text>Error :(</Text>;
 
-            return data.getCurrentResidents.map(({ name, age }) => (
-                <View key={name}>
-                    <Text>{`${name}: ${age}`}</Text>
-                </View>
-            ));
+            return <List containerStyle={{marginBottom: 0}}>
+                {
+                    data.getCurrentResidents.map(({name, age}) => (
+                        <ListItem
+                            roundAvatar
+                            avatar={{uri:'https://s3.amazonaws.com/uifaces/faces/twitter/ladylexy/128.jpg'}}
+                            key={name}
+                            title={name}
+                            subtitle={age}
+                        />
+                    ))
+                }
+            </List>
         }}
     </Query>
 );

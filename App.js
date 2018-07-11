@@ -1,41 +1,21 @@
 import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
-import ApolloClient from "apollo-boost";
-import gql from "graphql-tag";
+import Home from './Home';
 
-export default class App extends React.Component {
-  render() {
-    return (
-      <View style={styles.container}>
-        <Text>=^-^=</Text>
-      </View>
-    );
-  }
-}
+import { ApolloProvider } from "react-apollo";
+import { AppRegistry } from 'react-native';
+import ApolloClient from 'apollo-boost';
+
 
 const client = new ApolloClient({
     uri: "http://localhost:4000/graphql"
 });
 
-client
-    .query({
-        query: gql`
-      {
-        getAllCats {
-          name
-          resident
-          age
-        }
-      }
-    `
-    })
-    .then(result => console.log(result));
+const App = () => (
+    <ApolloProvider client={client}>
+        <Home />
+    </ApolloProvider>
+);
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});
+export default App;
+
+AppRegistry.registerComponent('ShelterAppUI', () => App);

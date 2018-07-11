@@ -1,5 +1,5 @@
 import React from 'react';
-import Home from './Home';
+import ShelterApp from './ShelterApp';
 
 import { ApolloProvider } from "react-apollo";
 import { AppRegistry } from 'react-native';
@@ -12,7 +12,7 @@ const client = new ApolloClient({
 
 const App = () => (
     <ApolloProvider client={client}>
-        <Home />
+        <ShelterApp />
     </ApolloProvider>
 );
 

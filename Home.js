@@ -9,14 +9,16 @@ export default class ShelterApp extends React.Component {
                 <Text>=^-^=</Text>
                 <Button
                     onPress={() => this.props.navigation.navigate('Residents', {
-                        resident: true
+                        resident: true,
+                        title: 'Current Residents'
                     })}
                     title="Current Residents"
                     color="#841584"
                 />
                 <Button
                     onPress={() => this.props.navigation.navigate('Residents', {
-                        resident: false
+                        resident: false,
+                        title: 'Past Residents'
                     })}
                     title="Past Residents"
                     color="#841584"

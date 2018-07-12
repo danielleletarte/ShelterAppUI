@@ -13,6 +13,7 @@ const GetResidentsList = (props) => (
               getCurrentResidents(resident: ${props.resident}) {
                 name
                 age
+                image
               }
             }
         `}
@@ -21,12 +22,12 @@ const GetResidentsList = (props) => (
             if (loading) return <Text>Loading...</Text>;
             if (error) return <Text>Error :(</Text>;
 
-            return <List containerStyle={{marginBottom: 0}}>
+            return <List containerStyle={{marginBottom: 0, marginTop: 0}}>
                 {
-                    data.getCurrentResidents.map(({name, age}) => (
+                    data.getCurrentResidents.map(({name, age, image}) => (
                         <ListItem
                             roundAvatar
-                            avatar={{uri:'https://s3.amazonaws.com/uifaces/faces/twitter/ladylexy/128.jpg'}}
+                            avatar={{uri:image}}
                             key={name}
                             title={name}
                             subtitle={age}

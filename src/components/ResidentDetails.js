@@ -1,21 +1,10 @@
 import React from "react";
-import { StyleSheet, Text, View } from "react-native";
+import GetResidentDetails from "./GetResidentDetails";
 
 export default class ResidentDetails extends React.Component {
   render() {
-    return (
-      <View style={styles.container}>
-        <Text>=^-^=</Text>
-      </View>
-    );
+    const { navigation } = this.props;
+    const id = navigation.getParam("id");
+    return <GetResidentDetails id={JSON.stringify(id)} />;
   }
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: "#fff",
-    alignItems: "center",
-    justifyContent: "center"
-  }
-});

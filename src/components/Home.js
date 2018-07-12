@@ -26,7 +26,6 @@ export default class ShelterApp extends React.Component {
       resident: this.state.buttons[selectedIndex].resident,
       title: this.state.buttons[selectedIndex].title
     });
-    console.log(this.props);
   }
 
   render() {

@@ -31,7 +31,11 @@ const GetResidentsList = props => (
               key={_id}
               title={name}
               subtitle={age}
-              onPress={() => props.navigation.navigate("ResidentDetails")}
+              onPress={() =>
+                props.navigation.navigate("ResidentDetails", {
+                  id: _id
+                })
+              }
             />
           ))}
         </List>

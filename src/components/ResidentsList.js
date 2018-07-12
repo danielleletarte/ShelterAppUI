@@ -1,18 +1,21 @@
 import React from "react";
-import GetResidentsList from './GetResidentsList';
-
+import GetResidentsList from "./GetResidentsList";
 
 export default class ResidentsList extends React.Component {
-    static navigationOptions = ({ navigation }) => {
-        return {
-            title: navigation.getParam('title')
-        };
+  static navigationOptions = ({ navigation }) => {
+    return {
+      title: navigation.getParam("title")
     };
-    render() {
-        const { navigation } = this.props;
-        const resident = navigation.getParam('resident');
-        return(
-            <GetResidentsList resident={JSON.stringify(resident)}/>
-        );
-    }
+  };
+
+  render() {
+    const { navigation } = this.props;
+    const resident = navigation.getParam("resident");
+    return (
+      <GetResidentsList
+        resident={JSON.stringify(resident)}
+        navigation={navigation}
+      />
+    );
+  }
 }

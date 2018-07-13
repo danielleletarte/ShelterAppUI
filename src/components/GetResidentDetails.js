@@ -11,7 +11,7 @@ const GetResidentDetails = props => (
               getCat(_id: ${props.id}) {
                 name
                 age
-                image
+                imageLarge
                 _id
               }
             }
@@ -23,7 +23,12 @@ const GetResidentDetails = props => (
       console.log(data);
 
       return (
-        <Card title={data.getCat.name} image={{ uri: data.getCat.image }} />
+        <Card
+          containerStyle={{ margin: 0 }}
+          flex={1}
+          title={data.getCat.name.toUpperCase()}
+          image={{ uri: data.getCat.imageLarge }}
+        />
       );
     }}
   </Query>

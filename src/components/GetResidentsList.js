@@ -12,7 +12,7 @@ const GetResidentsList = props => (
               getCurrentResidents(resident: ${props.resident}) {
                 name
                 age
-                image
+                imageSmall
                 _id
               }
             }
@@ -24,10 +24,11 @@ const GetResidentsList = props => (
 
       return (
         <List containerStyle={{ marginBottom: 0, marginTop: 0 }}>
-          {data.getCurrentResidents.map(({ name, age, image, _id }) => (
+          {data.getCurrentResidents.map(({ name, age, imageSmall, _id }) => (
             <ListItem
+              containerStyle={{ borderBottomWidth: 0 }}
               roundAvatar
-              avatar={{ uri: image }}
+              avatar={{ uri: imageSmall }}
               key={_id}
               title={name}
               subtitle={age}

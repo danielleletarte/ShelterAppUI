@@ -1,8 +1,9 @@
 import { Query } from "react-apollo";
 import gql from "graphql-tag";
 import React from "react";
-import { Text } from "react-native";
+import { Text, View } from "react-native";
 import { Card } from "react-native-elements";
+import DailyHealth from "./DailyHealth";
 
 const GetResidentDetails = props => (
   <Query
@@ -13,6 +14,13 @@ const GetResidentDetails = props => (
                 age
                 imageLarge
                 _id
+                sex
+                allHealthStats {
+                    date
+                    eat
+                    urinate
+                    poo
+                }
               }
             }
         `}
@@ -23,12 +31,14 @@ const GetResidentDetails = props => (
       console.log(data);
 
       return (
-        <Card
-          containerStyle={{ margin: 0 }}
-          flex={1}
-          title={data.getCat.name.toUpperCase()}
-          image={{ uri: data.getCat.imageLarge }}
-        />
+        <View>
+          <Card
+            containerStyle={{ margin: 0 }}
+            title={data.getCat.name.toUpperCase()}
+            image={{ uri: data.getCat.imageLarge }}
+          />
+          <DailyHealth healthData={data.getCat.allHealthStats[1]} />
+        </View>
       );
     }}
   </Query>

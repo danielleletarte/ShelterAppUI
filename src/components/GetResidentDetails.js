@@ -4,6 +4,7 @@ import React from "react";
 import { Text, View } from "react-native";
 import { Card } from "react-native-elements";
 import DailyHealth from "./DailyHealth";
+import moment from "moment";
 
 const GetResidentDetails = props => (
   <Query
@@ -30,6 +31,12 @@ const GetResidentDetails = props => (
       if (error) return <Text>Error :(</Text>;
       console.log(data);
 
+      let todayHealthStats = data.getCat.allHealthStats.filter(item =>
+        moment(item.date).isSame(moment().format("YYYYMMDD"))
+      );
+      console.log(todayHealthStats);
+      console.log(moment().format("YYYYMMDD"));
+
       return (
         <View>
           <Card
@@ -37,7 +44,7 @@ const GetResidentDetails = props => (
             title={data.getCat.name.toUpperCase()}
             image={{ uri: data.getCat.imageLarge }}
           />
-          <DailyHealth healthData={data.getCat.allHealthStats[1]} />
+          <DailyHealth healthData={todayHealthStats[0]} />
         </View>
       );
     }}

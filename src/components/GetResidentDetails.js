@@ -4,6 +4,7 @@ import React from "react";
 import { Text, View } from "react-native";
 import { Avatar, Button } from "react-native-elements";
 import DailyHealth from "./DailyHealth";
+import FullHealthHistory from "./FullHealthHistory";
 import moment from "moment";
 
 export default class GetResidentDetails extends React.Component {
@@ -12,6 +13,20 @@ export default class GetResidentDetails extends React.Component {
     this.state = {
       buttonClicked: false
     };
+
+    this.healthHistoryClick = this.healthHistoryClick.bind(this);
+  }
+
+  renderHealthData(allHealthStats, todayHealthStats) {
+    if (this.state.buttonClicked === false) {
+      return <DailyHealth healthData={todayHealthStats[0]} />;
+    } else {
+      return <FullHealthHistory healthHistory={allHealthStats} />;
+    }
+  }
+
+  healthHistoryClick() {
+    this.setState({ buttonClicked: !this.state.buttonClicked });
   }
 
   render() {
@@ -38,13 +53,10 @@ export default class GetResidentDetails extends React.Component {
         {({ loading, error, data }) => {
           if (loading) return <Text>Loading...</Text>;
           if (error) return <Text>Error :(</Text>;
-          console.log(data);
-
+          let allHealthStats = data.getCat.allHealthStats;
           let todayHealthStats = data.getCat.allHealthStats.filter(item =>
             moment(item.date).isSame(moment().format("YYYYMMDD"))
           );
-          console.log(todayHealthStats);
-          console.log(moment().format("YYYYMMDD"));
 
           return (
             <View
@@ -71,15 +83,11 @@ export default class GetResidentDetails extends React.Component {
                   {data.getCat.sex}
                 </Text>
               </View>
-              <DailyHealth healthData={todayHealthStats[0]} />
               <Button
                 title="View Health History"
-                onPress={() =>
-                  this.props.navigation.navigate("FullHealthHistory", {
-                    healthHistory: data.getCat.allHealthStats
-                  })
-                }
+                onPress={this.healthHistoryClick}
               />
+              {this.renderHealthData(allHealthStats, todayHealthStats)}
             </View>
           );
         }}

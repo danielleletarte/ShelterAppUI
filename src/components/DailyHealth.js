@@ -11,6 +11,12 @@ export default class DailyHealth extends React.Component {
       editEnabled: false,
       healthData: props.healthData
     };
+
+    this.setEditMode = this.setEditMode.bind(this);
+  }
+
+  setEditMode() {
+    this.setState({ editEnabled: !this.state.editEnabled });
   }
 
   render() {
@@ -22,21 +28,21 @@ export default class DailyHealth extends React.Component {
               ? moment(this.state.healthData.date).format("MMMM Do YYYY")
               : moment().format("MMMM Do YYYY")}
           </Text>
-          <Icon name="edit" size={20} />
+          <Icon name="edit" size={20} onPress={this.setEditMode} />
         </View>
         <HealthSelection
           task={this.state.healthData ? this.state.healthData.urinate : false}
-          edit={true}
+          edit={this.state.editEnabled}
           text={"Urinate"}
         />
         <HealthSelection
           task={this.state.healthData ? this.state.healthData.poo : false}
-          edit={false}
+          edit={this.state.editEnabled}
           text={"Feces"}
         />
         <HealthSelection
           task={this.state.healthData ? this.state.healthData.eat : false}
-          edit={false}
+          edit={this.state.editEnabled}
           text={"Eat"}
         />
         <Text style={{ fontWeight: "bold" }}>Notes</Text>

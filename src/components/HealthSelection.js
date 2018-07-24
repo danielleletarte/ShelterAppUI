@@ -26,7 +26,7 @@ export default class HealthSelection extends React.Component {
         uncheckedIcon="ios-heart"
         checkedColor="red"
         checked={this.props.edit ? this.state.checked : this.props.task}
-        onIconPress={this.updateSelection}
+        onIconPress={this.props.edit ? this.updateSelection : null}
         containerStyle={{
           backgroundColor: "white",
           marginLeft: 0,

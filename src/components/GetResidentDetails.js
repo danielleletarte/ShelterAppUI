@@ -84,7 +84,11 @@ export default class GetResidentDetails extends React.Component {
                 </Text>
               </View>
               <Button
-                title="View Health History"
+                title={
+                  this.state.buttonClicked
+                    ? "Hide Full History"
+                    : "View Full Health History"
+                }
                 onPress={this.healthHistoryClick}
               />
               {this.renderHealthData(allHealthStats, todayHealthStats)}

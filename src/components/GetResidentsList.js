@@ -31,10 +31,10 @@ const GetResidentsList = props => (
               avatar={{ uri: imageSmall }}
               key={_id}
               title={name}
-              subtitle={age}
               onPress={() =>
                 props.navigation.navigate("ResidentDetails", {
-                  id: _id
+                  id: _id,
+                  navigation: props.navigation
                 })
               }
             />

@@ -6,7 +6,7 @@ import moment from "moment";
 
 const DailyHealth = props => (
   <Card>
-    <Text>
+    <Text style={{ fontWeight: "bold" }}>
       {props.healthData
         ? moment(props.healthData.date).format("MMMM Do YYYY")
         : moment().format("MMMM Do YYYY")}
@@ -19,13 +19,14 @@ const DailyHealth = props => (
     <HealthSelection
       task={props.healthData ? props.healthData.poo : false}
       edit={false}
-      text={"Poo"}
+      text={"Feces"}
     />
     <HealthSelection
       task={props.healthData ? props.healthData.eat : false}
       edit={false}
       text={"Eat"}
     />
+    <Text style={{ fontWeight: "bold" }}>Notes</Text>
   </Card>
 );
 

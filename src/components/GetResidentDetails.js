@@ -2,7 +2,7 @@ import { Query } from "react-apollo";
 import gql from "graphql-tag";
 import React from "react";
 import { Text, View } from "react-native";
-import { Card } from "react-native-elements";
+import { Avatar, Button } from "react-native-elements";
 import DailyHealth from "./DailyHealth";
 import moment from "moment";
 
@@ -38,13 +38,31 @@ const GetResidentDetails = props => (
       console.log(moment().format("YYYYMMDD"));
 
       return (
-        <View>
-          <Card
-            containerStyle={{ margin: 0 }}
-            title={data.getCat.name.toUpperCase()}
-            image={{ uri: data.getCat.imageLarge }}
-          />
+        <View
+          style={{ flex: 1, flexDirection: "column", backgroundColor: "white" }}
+        >
+          <View style={{ flexDirection: "row", margin: 10 }}>
+            <Avatar
+              xlarge
+              rounded
+              title={data.getCat.name.toUpperCase()}
+              source={{ uri: data.getCat.imageLarge }}
+            />
+            <Text style={{ flex: 0.9, fontWeight: "bold", fontSize: 15 }}>
+              {data.getCat.name}
+            </Text>
+            <Text style={{ flex: 0.8, fontSize: 15 }}>{data.getCat.age}</Text>
+            <Text style={{ flex: 0.8, fontSize: 15 }}>{data.getCat.sex}</Text>
+          </View>
           <DailyHealth healthData={todayHealthStats[0]} />
+          <Button
+            title="View Health History"
+            onPress={() =>
+              props.navigation.navigate("FullHealthHistory", {
+                healthHistory: data.getCat.allHealthStats
+              })
+            }
+          />
         </View>
       );
     }}

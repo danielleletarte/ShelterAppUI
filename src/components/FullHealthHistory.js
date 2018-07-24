@@ -7,8 +7,8 @@ export default class FullHealthHistory extends React.Component {
     const healthHistory = this.props.healthHistory;
     return (
       <ScrollView>
-        {healthHistory.map((healthDay, index) => {
-          return <DailyHealth key={index} healthData={healthDay} />;
+        {healthHistory.map(healthDay => {
+          return <DailyHealth key={healthDay.id} healthData={healthDay} />;
         })}
       </ScrollView>
     );

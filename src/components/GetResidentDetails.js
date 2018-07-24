@@ -41,6 +41,7 @@ export default class GetResidentDetails extends React.Component {
                 _id
                 sex
                 allHealthStats {
+                    _id
                     date
                     eat
                     urinate

@@ -45,6 +45,7 @@ export default class GetResidentDetails extends React.Component {
                     eat
                     urinate
                     poo
+                    notes
                 }
               }
             }

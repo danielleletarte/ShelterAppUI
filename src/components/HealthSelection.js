@@ -27,9 +27,12 @@ export default class HealthSelection extends React.Component {
         checkedColor="red"
         checked={this.props.edit ? this.state.checked : this.props.task}
         onIconPress={this.updateSelection}
-        component={View}
-        left
-        containerStyle={{ backgroundColor: "white", borderWidth: 0 }}
+        containerStyle={{
+          backgroundColor: "white",
+          marginLeft: 0,
+          borderWidth: 0
+        }}
+        textStyle={{ marginLeft: 0 }}
       />
     );
   }

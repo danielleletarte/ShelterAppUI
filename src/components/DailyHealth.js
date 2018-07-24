@@ -1,16 +1,19 @@
 import React from "react";
-import { Text } from "react-native";
-import { Card } from "react-native-elements";
+import { Text, View } from "react-native";
+import { Card, Icon } from "react-native-elements";
 import HealthSelection from "./HealthSelection";
 import moment from "moment";
 
 const DailyHealth = props => (
   <Card>
-    <Text style={{ fontWeight: "bold" }}>
-      {props.healthData
-        ? moment(props.healthData.date).format("MMMM Do YYYY")
-        : moment().format("MMMM Do YYYY")}
-    </Text>
+    <View style={{ flexDirection: "row" }}>
+      <Text style={{ flex: 1, fontWeight: "bold" }}>
+        {props.healthData
+          ? moment(props.healthData.date).format("MMMM Do YYYY")
+          : moment().format("MMMM Do YYYY")}
+      </Text>
+      <Icon name="edit" size={20} />
+    </View>
     <HealthSelection
       task={props.healthData ? props.healthData.urinate : false}
       edit={true}
@@ -27,6 +30,7 @@ const DailyHealth = props => (
       text={"Eat"}
     />
     <Text style={{ fontWeight: "bold" }}>Notes</Text>
+    <Text>{props.healthData ? props.healthData.notes : null}</Text>
   </Card>
 );
 

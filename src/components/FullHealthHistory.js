@@ -8,7 +8,7 @@ export default class FullHealthHistory extends React.Component {
     return (
       <ScrollView>
         {healthHistory.map(healthDay => {
-          return <DailyHealth key={healthDay.id} healthData={healthDay} />;
+          return <DailyHealth key={healthDay._id} healthData={healthDay} />;
         })}
       </ScrollView>
     );

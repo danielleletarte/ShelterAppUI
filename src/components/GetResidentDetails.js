@@ -75,15 +75,29 @@ export default class GetResidentDetails extends React.Component {
                   title={data.getCat.name.toUpperCase()}
                   source={{ uri: data.getCat.imageLarge }}
                 />
-                <Text style={{ flex: 0.9, fontWeight: "bold", fontSize: 15 }}>
-                  {data.getCat.name}
-                </Text>
-                <Text style={{ flex: 0.8, fontSize: 15 }}>
-                  {data.getCat.age}
-                </Text>
-                <Text style={{ flex: 0.8, fontSize: 15 }}>
-                  {data.getCat.sex}
-                </Text>
+                <View
+                  style={{
+                    flex: 1,
+                    flexDirection: "column"
+                  }}
+                >
+                  <Text
+                    style={{
+                      flex: 0.5,
+                      fontWeight: "bold",
+                      fontSize: 25,
+                      marginLeft: 30
+                    }}
+                  >
+                    {data.getCat.name}
+                  </Text>
+                  <Text style={{ flex: 0.25, fontSize: 20, marginLeft: 30 }}>
+                    {data.getCat.age} years
+                  </Text>
+                  <Text style={{ flex: 0.25, fontSize: 20, marginLeft: 30 }}>
+                    {data.getCat.sex === "M" ? "Male" : "Female"}
+                  </Text>
+                </View>
               </View>
               <Button
                 title={

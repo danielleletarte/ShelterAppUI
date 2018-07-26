@@ -5,15 +5,12 @@ import { View } from "react-native";
 export default class HealthSelection extends React.Component {
   constructor(props) {
     super(props);
-    this.state = {
-      checked: this.props.task
-    };
 
     this.updateSelection = this.updateSelection.bind(this);
   }
 
   updateSelection() {
-    this.setState({ checked: !this.state.checked });
+    this.props.updateSelection(this.props.taskName);
   }
 
   render() {
@@ -25,7 +22,7 @@ export default class HealthSelection extends React.Component {
         checkedIcon="ios-heart"
         uncheckedIcon="ios-heart"
         checkedColor="red"
-        checked={this.props.edit ? this.state.checked : this.props.task}
+        checked={this.props.task}
         onIconPress={this.props.edit ? this.updateSelection : null}
         containerStyle={{
           backgroundColor: "white",

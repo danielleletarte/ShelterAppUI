@@ -4,6 +4,9 @@ import { Card, Icon, FormInput, Button } from "react-native-elements";
 import HealthSelection from "./HealthSelection";
 import moment from "moment";
 
+import gql from "graphql-tag";
+import { Mutation } from "react-apollo";
+
 export default class DailyHealth extends React.Component {
   constructor(props) {
     super(props);
@@ -12,11 +15,12 @@ export default class DailyHealth extends React.Component {
       healthData: props.healthData
         ? props.healthData
         : {
-            notes: null,
+            _id: this.props.key,
+            date: moment().format("YYYY MM DD"),
             eat: false,
             urinate: false,
-            date: moment().format("YYYYMMDD"),
-            poo: false
+            poo: false,
+            notes: null
           }
     };
 
@@ -44,7 +48,29 @@ export default class DailyHealth extends React.Component {
     this.setState({ healthData });
   }
 
+  healthDataNoTypeName() {
+    const healthData = this.state.healthData;
+    const { __typename, ...destructuredHealthData } = healthData;
+    console.log("destructuredHealthData");
+    console.log(destructuredHealthData);
+    return destructuredHealthData;
+  }
+
   displayEditableNotesField() {
+    const EDIT_HEALTH = gql`
+      mutation updateDailyHealth($input: DailyHealthInput) {
+        updateDailyHealth(input: $input) {
+          name
+          allHealthStats {
+            date
+            eat
+            urinate
+            poo
+            notes
+          }
+        }
+      }
+    `;
     if (this.state.editEnabled === false) {
       return (
         <Text>
@@ -58,12 +84,20 @@ export default class DailyHealth extends React.Component {
             onChangeText={notes => this.updateNotes(notes)}
             value={this.state.healthData.notes}
           />
-          <Button
-            small
-            style={{ marginTop: 10 }}
-            title="Save"
-            onPress={() => console.log(this.state)}
-          />
+          <Mutation mutation={EDIT_HEALTH}>
+            {(updateDailyHealth, { data }) => (
+              <Button
+                small
+                style={{ marginTop: 10 }}
+                title="Save"
+                onPress={() =>
+                  updateDailyHealth({
+                    variables: { input: this.healthDataNoTypeName() }
+                  })
+                }
+              />
+            )}
+          </Mutation>
         </View>
       );
     }

@@ -93,7 +93,7 @@ export default class DailyHealth extends React.Component {
                 onPress={() =>
                   updateDailyHealth({
                     variables: { input: this.healthDataNoTypeName() }
-                  })
+                  }).then(this.setEditMode)
                 }
               />
             )}
